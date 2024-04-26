@@ -107,10 +107,10 @@ class HomeTabs extends StatelessWidget {
               },
 
               buildWhen: (previous, current) {
-                if(current is HomeTabLoadingState){
-                  return false;//mtro7sh t build
+                if(current is HomeSuccessState){
+                  return true;//mtro7sh t build
                 }
-                return true;
+                return false;
               },
               builder: (  context, state) {
                 if(state is  HomeSuccessState ){
