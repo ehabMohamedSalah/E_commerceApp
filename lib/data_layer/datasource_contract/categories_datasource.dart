@@ -2,7 +2,7 @@
 
 import 'package:dartz/dartz.dart';
 
-import '../model/categoriesResponse.dart';
+import '../model/categoryResponse/categoriesResponse.dart';
 
 abstract class categoriesDataSource{
 

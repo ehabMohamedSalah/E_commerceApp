@@ -1,7 +1,8 @@
 
 import 'package:e_commerce/data_layer/model/Metadata.dart';
 
- import 'CategoryModel.dart';
+import 'categoryModel.dart';
+
 
 /// results : 10
 /// metadata : {"currentPage":1,"numberOfPages":1,"limit":40}
@@ -25,7 +26,7 @@ class CategoriesResponse {
   }
   int? results;
   Metadata? metadata;
-  List<CategoryModel>? data;
+  List< CategoryModel>? data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

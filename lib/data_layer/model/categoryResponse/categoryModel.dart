@@ -1,6 +1,6 @@
 
 
-import '../../Domain/entity/Categories_entity.dart';
+import '../../../Domain/entity/Categories_entity.dart';
 
 /// _id : "6439d61c0049ad0b52b90051"
 /// name : "Music"

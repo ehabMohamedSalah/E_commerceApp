@@ -13,9 +13,9 @@ class CategoryWidget extends StatelessWidget {
      children: [
      CachedNetworkImage(
          imageUrl: category.image ??"",
-     errorWidget: (context, url, error) => Icon(Icons.error,size: 25.sp,),
-     placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-       imageBuilder: (context, imageProvider) {
+         errorWidget: (context, url, error) => Icon(Icons.error,size: 25.sp,),
+         placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+         imageBuilder: (context, imageProvider) {
            return CircleAvatar(
              radius: 50,
                backgroundImage:imageProvider ,

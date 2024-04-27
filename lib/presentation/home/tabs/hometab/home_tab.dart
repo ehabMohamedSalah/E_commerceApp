@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce/core/utils/strings_manager.dart';
 import 'package:e_commerce/presentation/home/tabs/hometab/view_model/HomeTab.dart';
 import 'package:e_commerce/presentation/home/tabs/hometab/widget/category_widget.dart';
+import 'package:e_commerce/presentation/home/tabs/hometab/widget/categorylist_widget.dart';
 import 'package:flutter/cupertino.dart';
     import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -24,7 +25,8 @@ class HomeTabs extends StatelessWidget {
         padding:   REdgeInsets.all(15.0),
         child: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(child: SizedBox(height: 40.h,)),
+          SliverToBoxAdapter(
+              child: SizedBox(height: 40.h,)),
           SliverToBoxAdapter(
             child: Container(
                 alignment: Alignment.centerLeft,
@@ -72,66 +74,24 @@ class HomeTabs extends StatelessWidget {
                   StringsManger.categories,
                   style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                       fontWeight: FontWeight.w400,
-                      fontSize: 12.sp
+                      fontSize: 16.sp
                   ),
-                )
+                ),
+                Text(
+                  StringsManger.viewAll,
+                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16.sp
+                  ),
+                ),
               ],
             ),
           ),
           SliverToBoxAdapter(child: SizedBox(height: 24.h,)),
           SliverToBoxAdapter(
             //3shan t2dr t listen 3ala al state
-            child: BlocConsumer<HomeTabViewModel,HomeTabState>(
-
-              listenWhen: (previous, currentState) {
-                if(currentState is HomeTabLoadingState || currentState is HomeTabErrorState){
-                  return true;
-                }
-                return false;
-              },
-              listener: (  context,  state) {
-                if(state is  HomeTabLoadingState ){
-                  showDialog(context: context, builder:  (context) {
-                    return AlertDialog(
-                      content: Center(child: CircularProgressIndicator()),
-                    );
-                  },);
-                }
-                if(state is HomeTabErrorState){
-                  showDialog(context: context, builder:  (context) {
-                    return AlertDialog(
-                      content:Text(state.errorMessage),
-                    );
-                  },);
-                 }
-              },
-
-              buildWhen: (previous, current) {
-                if(current is HomeSuccessState){
-                  return true;//mtro7sh t build
-                }
-                return false;
-              },
-              builder: (  context, state) {
-                if(state is  HomeSuccessState ){
-                return SizedBox(
-                  height: 288.h,
-                  child: GridView.builder(
-                    scrollDirection: Axis.horizontal,
-                      itemBuilder:(context, index) =>CategoryWidget(state.categories[index]) ,
-                      itemCount:state.categories.length,
-                      gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 16.h,
-
-                      ) ,
-                  ),
-                );
-                }
-                return Center(child: CircularProgressIndicator());
-              },
-
-            ),)
+            child: CategoryConsumer(),
+          )
 
 
 

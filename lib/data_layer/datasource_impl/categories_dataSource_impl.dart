@@ -1,7 +1,7 @@
 
 
 import 'package:dartz/dartz.dart';
-import 'package:e_commerce/data_layer/model/categoriesResponse.dart';
+import 'package:e_commerce/data_layer/model/categoryResponse/categoriesResponse.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../core/api/api_manager.dart';
