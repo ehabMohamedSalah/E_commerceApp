@@ -28,7 +28,7 @@ class _CategoryConsumerState extends State<CategoryConsumer> {
     return BlocConsumer<HomeTabViewModel, HomeTabState>(
       //hy3ml build fe state al success bs
       buildWhen: (previous, current) {
-        if (current is HomeTabLoadingState || current is HomeTabErrorState) {
+        if (current is HomeTabLoadingState || current is HomeTabErrorState || current is BrandSuccessState ||current is BrandTabErrorState ||current is BrandTabErrorState) {
           return false; //mtro7sh t build
         }
 
@@ -73,7 +73,7 @@ class _CategoryConsumerState extends State<CategoryConsumer> {
       builder: (context, state) {
         if (state is HomeSuccessState) {
           return SizedBox(
-            height: 330.h,
+            height: 250.h,
             child: GridView.builder(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) =>

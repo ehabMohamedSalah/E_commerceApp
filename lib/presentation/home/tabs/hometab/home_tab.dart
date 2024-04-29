@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce/core/utils/strings_manager.dart';
 import 'package:e_commerce/presentation/home/tabs/hometab/view_model/HomeTab.dart';
+import 'package:e_commerce/presentation/home/tabs/hometab/widget/brandsList.dart';
 import 'package:e_commerce/presentation/home/tabs/hometab/widget/category_widget.dart';
 import 'package:e_commerce/presentation/home/tabs/hometab/widget/categorylist_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,8 +30,9 @@ class HomeTabs extends StatelessWidget {
               child: SizedBox(height: 40.h,)),
           SliverToBoxAdapter(
             child: Container(
+              height: 60.h,
                 alignment: Alignment.centerLeft,
-                child: Image.asset(assetManager.route)),
+                child: Image.asset(assetManager.logo)),
           ),
           SliverToBoxAdapter(child: SizedBox(height: 20.h,)),
           SliverToBoxAdapter(
@@ -67,31 +69,64 @@ class HomeTabs extends StatelessWidget {
           ) ,
           SliverToBoxAdapter(child: SizedBox(height: 24.h,)),
           SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  StringsManger.categories,
-                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16.sp
+            child: Container(
+              color: Colors.grey,
+              height: 30.h,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    StringsManger.categories,
+                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16.sp
+                    ),
                   ),
-                ),
-                Text(
-                  StringsManger.viewAll,
-                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16.sp
+                  Text(
+                    StringsManger.viewAll,
+                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16.sp
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           SliverToBoxAdapter(child: SizedBox(height: 24.h,)),
           SliverToBoxAdapter(
             //3shan t2dr t listen 3ala al state
             child: CategoryConsumer(),
-          )
+            
+          ),
+
+          SliverToBoxAdapter(child: SizedBox(height: 24.h,)),
+          SliverToBoxAdapter(
+            child: Container(
+              height: 30.h,
+              color: Colors.grey,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    StringsManger.brands,
+                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16.sp
+                    ),
+                  ),
+                  Text(
+                    StringsManger.viewAll,
+                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16.sp
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(child: BrandsList()),
 
 
 

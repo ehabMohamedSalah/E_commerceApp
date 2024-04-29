@@ -17,13 +17,13 @@ class CategoryWidget extends StatelessWidget {
          placeholder: (context, url) => Center(child: CircularProgressIndicator()),
          imageBuilder: (context, imageProvider) {
            return CircleAvatar(
-             radius: 50,
+             radius: 28,
                backgroundImage:imageProvider ,
            );
        },
      ),
        SizedBox(height: 8.h,),
-       Text(category.name??"",maxLines: 2,overflow: TextOverflow.ellipsis,)
+       Text(category.name??"",maxLines: 1,overflow: TextOverflow.ellipsis,)
    ],
     );
   }
