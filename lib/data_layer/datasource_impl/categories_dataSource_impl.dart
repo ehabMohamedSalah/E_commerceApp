@@ -13,7 +13,7 @@ class CategoriesDataSourceImpl extends categoriesDataSource{
   @override
   ApiManager apiManager;
   @factoryMethod
-  CategoriesDataSourceImpl( this.apiManager);
+  CategoriesDataSourceImpl(this.apiManager);
 
  Future<Either<CategoriesResponse,String>>getCategories() async{
     try{

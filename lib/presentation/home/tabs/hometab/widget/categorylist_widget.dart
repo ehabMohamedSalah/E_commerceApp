@@ -28,11 +28,11 @@ class _CategoryConsumerState extends State<CategoryConsumer> {
     return BlocConsumer<HomeTabViewModel, HomeTabState>(
       //hy3ml build fe state al success bs
       buildWhen: (previous, current) {
-        if (current is HomeTabLoadingState || current is HomeTabErrorState || current is BrandSuccessState ||current is BrandTabErrorState ||current is BrandTabErrorState) {
-          return false; //mtro7sh t build
+        if ( current is HomeSuccessState) {
+          return true; //mtro7sh t build
         }
 
-        return true;
+        return false;
       },
 
       //b2olo listen fe al state de bsss

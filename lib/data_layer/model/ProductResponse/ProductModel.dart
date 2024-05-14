@@ -84,7 +84,7 @@ class ProductModel {
   String? imageCover;
   CategoryModel? category;
   BrandModel? brand;
-  double? ratingsAverage;
+  num? ratingsAverage;
   String? createdAt;
   String? updatedAt;
  ProductModel copyWith({  int? sold,
@@ -101,7 +101,7 @@ class ProductModel {
   String? imageCover,
    CategoryModel? category,
    BrandModel? brand,
-  double? ratingsAverage,
+   num? ratingsAverage,
   String? createdAt,
   String? updatedAt,
  }) => ProductModel(  sold: sold ?? this.sold,

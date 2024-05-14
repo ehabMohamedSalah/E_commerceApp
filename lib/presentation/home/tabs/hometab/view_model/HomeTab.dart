@@ -3,19 +3,22 @@
 import 'package:bloc/bloc.dart';
 import 'package:e_commerce/Domain/usecases/brands_usecase.dart';
 import 'package:e_commerce/Domain/usecases/categories_usecase.dart';
+import 'package:e_commerce/Domain/usecases/product_usecase.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../Domain/entity/BrandEntity.dart';
 import '../../../../../Domain/entity/Categories_entity.dart';
+import '../../../../../Domain/entity/ProductEntity/ProductEntity.dart';
  @injectable
 class HomeTabViewModel extends Cubit<HomeTabState>{
 
   //ana 3ayzo yst5dm al useCase
   @factoryMethod
-  HomeTabViewModel(this.categoriesUseCase,this.brandUseCase):super(NewTabInitialState());
+  HomeTabViewModel(this.categoriesUseCase,this.brandUseCase,this.productUseCase):super(NewTabInitialState());
 
   CategoriesUseCase categoriesUseCase;
   BrandUseCase brandUseCase;
+  MostSellingProductUseCase productUseCase;
 
   GetCateories()async{
     emit(HomeTabLoadingState());
@@ -33,6 +36,12 @@ class HomeTabViewModel extends Cubit<HomeTabState>{
             (brands) =>emit(BrandSuccessState(brands)),
             (error) => emit(BrandTabErrorState(error)),
     );
+  }
+  GetProduct()async{
+      emit(ProductLoadingState());
+      var response= await productUseCase.call();
+      response.fold((products) => emit(ProductSuccessState(products)),
+              (error) => emit(ProductErrorState(error)));
   }
 }
 
@@ -57,4 +66,13 @@ class BrandTabErrorState extends HomeTabState{
 class BrandSuccessState extends HomeTabState{
    List<BrandEntity> brands;
    BrandSuccessState(this.brands);
+}
+class ProductLoadingState extends HomeTabState{}
+class ProductErrorState extends HomeTabState{
+   String errorMessage;
+   ProductErrorState(this.errorMessage);
+}
+class ProductSuccessState extends HomeTabState{
+   List<ProductEntity> products;
+   ProductSuccessState(this.products);
 }

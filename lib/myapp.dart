@@ -1,5 +1,7 @@
 import 'package:e_commerce/congfig/theme/appTheme.dart';
 import 'package:e_commerce/presentation/home/home_screen.dart';
+import 'package:e_commerce/presentation/signin_user/signin.dart';
+import 'package:e_commerce/presentation/signup_user/SignUp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,10 +20,13 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return     MaterialApp(
+          debugShowCheckedModeBanner: false,
           routes:{
             RoutesManager.HomeRoutes:(context) => HomeScreen(),
+            RoutesManager.SignInroute:(context) => SignIn(),
+            RoutesManager.SignUproute:(context) => SignUp(),
           },
-          initialRoute: RoutesManager.HomeRoutes,
+          initialRoute: RoutesManager.SignInroute,
           theme:AppTheme.lightTheme ,
 
         );

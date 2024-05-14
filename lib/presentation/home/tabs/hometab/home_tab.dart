@@ -2,8 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce/core/utils/strings_manager.dart';
 import 'package:e_commerce/presentation/home/tabs/hometab/view_model/HomeTab.dart';
 import 'package:e_commerce/presentation/home/tabs/hometab/widget/brandsList.dart';
-import 'package:e_commerce/presentation/home/tabs/hometab/widget/category_widget.dart';
-import 'package:e_commerce/presentation/home/tabs/hometab/widget/categorylist_widget.dart';
+ import 'package:e_commerce/presentation/home/tabs/hometab/widget/categorylist_widget.dart';
+import 'package:e_commerce/presentation/home/tabs/hometab/widget/productList.dart';
 import 'package:flutter/cupertino.dart';
     import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -19,22 +19,18 @@ class HomeTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> ads=[ assetManager.ads1,assetManager.ads2,assetManager.ads3];
+    List<String> ads=[ assetManagerr.ads1,assetManagerr.ads2,assetManagerr.ads3];
+
+    //create object of provider
     return BlocProvider(
       create: (BuildContext context) => getIt<HomeTabViewModel>(),
       child: Padding(
-        padding:   REdgeInsets.all(15.0),
+        padding:   REdgeInsets.only(right: 15,left: 15,bottom: 15),
         child: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(
-              child: SizedBox(height: 40.h,)),
-          SliverToBoxAdapter(
-            child: Container(
-              height: 60.h,
-                alignment: Alignment.centerLeft,
-                child: Image.asset(assetManager.logo)),
-          ),
-          SliverToBoxAdapter(child: SizedBox(height: 20.h,)),
+
+
+          SliverToBoxAdapter(child: SizedBox(height: 5.h,)),
           SliverToBoxAdapter(
             child: Row(children: [
               Container(
@@ -127,6 +123,12 @@ class HomeTabs extends StatelessWidget {
             ),
           ),
           SliverToBoxAdapter(child: BrandsList()),
+          SliverToBoxAdapter(child: SizedBox(height: 24.h,)),
+          SliverToBoxAdapter(child: Container(
+              height: 30.h,
+              color: Colors.grey,
+              child: Text("Most Selling",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),))),
+          SliverToBoxAdapter(child: ProductList(),)
 
 
 

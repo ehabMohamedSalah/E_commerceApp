@@ -57,7 +57,7 @@ class ProductEntity {
   String? imageCover;
   CategoryEntity? category;
   BrandEntity? brand;
-  double? ratingsAverage;
+  num? ratingsAverage;
 
 
 
