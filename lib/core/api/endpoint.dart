@@ -5,4 +5,5 @@ class Endpoints{
   static  String SubCategoriesEndpoint(String CategoryId){
     return "/api/v1/categories/${CategoryId}/subcategories";
   }
+  static const String signupEndpoint="/api/v1/auth/signup";
 }

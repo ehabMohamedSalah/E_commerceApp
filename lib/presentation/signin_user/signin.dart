@@ -65,7 +65,7 @@ class _SignInState extends State<SignIn> {
                      }
                   },),
                 Align(
-                    alignment:  Alignment.topRight,
+                      alignment:  Alignment.topRight,
                     child: Text(StringsManger.forgetpassword,style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 16,fontWeight: FontWeight.w400),)),
                 SizedBox(height:30.h),
                 SizedBox(
