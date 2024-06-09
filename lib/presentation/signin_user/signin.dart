@@ -72,14 +72,19 @@ class _SignInState extends State<SignIn> {
                   width: double.infinity,
                   child: TextButtom(title:StringsManger.Login ,onPressed:(){
                     if(formKey.currentState?.validate()!=false){
-                     Navigator.pushNamed(context, RoutesManager.SignUproute);
+                     Navigator.pushNamed(context, RoutesManager.HomeRoutes);
                     }
                   } ,),
                 ),
                 SizedBox(height:20.h),
-                Align(
-                    alignment: Alignment.center,
-                    child: Text(StringsManger.dontHaveAcc,style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 18.sp),))
+                InkWell(
+                  onTap: (){
+                    Navigator.pushNamed(context, RoutesManager.SignUproute);
+                  },
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: Text(StringsManger.dontHaveAcc,style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 18.sp),)),
+                )
         
         
         
