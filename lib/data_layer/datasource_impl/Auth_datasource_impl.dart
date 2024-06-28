@@ -32,4 +32,22 @@ class AuthDatasourceImpl extends AuthDataSource{
    }
   }
 
+  @override
+  Future<Either<AuthResponseModel, String>> Signin({required String Email, required String password})async {
+    try{
+
+      var response= await apimanager.postRequest(endpoint:Endpoints.singInEndpoint,body:  {
+        "email":Email,
+        "password":password
+      } );
+      AuthResponseModel Authresponse=AuthResponseModel.fromJson(response.data);
+      if(Authresponse.statusMsg!=null){
+        return right(Authresponse.message??"");
+      }
+      return left(Authresponse);
+    }catch(error){
+      return right(error.toString());
+    }
+  }
+
 }

@@ -9,4 +9,5 @@ abstract class AuthDataSource{
     required String password,
     required String mobile,
 });
+ Future<Either<AuthResponseModel,String>> Signin({required String Email,required String password});
 }

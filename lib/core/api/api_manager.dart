@@ -11,7 +11,7 @@ static init() {
     BaseOptions(
       baseUrl: Constant.baseUrl,
       validateStatus: (status){
-        if((status!>=200 && status<300)||status==409){
+        if(status!<500){
           return true;
         }
         return false;

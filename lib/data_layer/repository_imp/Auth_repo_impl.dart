@@ -21,4 +21,15 @@ return right(error);
             });
   }
 
+  @override
+  Future<Either<AuthResponseEntity, String>> SignIn({required String Email, required String password}) async{
+    var response=await apiDatasource.Signin(Email: Email, password: password);
+    return response.fold((response) {
+       AuthResponseEntity AuthEntity =response.toAuthEntity();
+       return left(AuthEntity);
+    }, (error)  {
+      return right(error);
+    });
+  }
+
 }
