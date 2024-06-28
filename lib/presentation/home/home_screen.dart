@@ -1,3 +1,5 @@
+import 'package:e_commerce/core/local/prefs_helper.dart';
+import 'package:e_commerce/core/utils/routes_manager.dart';
 import 'package:e_commerce/presentation/home/tabs/category_tab/category_tab.dart';
 import 'package:e_commerce/presentation/home/tabs/hometab/home_tab.dart';
 import 'package:e_commerce/presentation/home/tabs/profile_tab/profile_tab.dart';
@@ -22,6 +24,15 @@ class HomeScreen extends StatelessWidget {
 
       return Scaffold(
         appBar: AppBar(
+          actions: [
+            IconButton(onPressed: (){
+              PrefsHelper.clearToken();
+              Navigator.pushNamedAndRemoveUntil(context, RoutesManager.SignInroute, (route) => false);
+            },icon:Icon(Icons.logout,size: 40.h),),
+
+            IconButton(onPressed: (){},icon:Icon(Icons.shopping_cart_outlined,size: 40.h),)
+
+          ],
           centerTitle: true,
           title: Container(
               height: 62,

@@ -35,14 +35,16 @@ import '../../Domain/repository_contract/Brand_repo.dart' as _i24;
 import '../../Domain/repository_contract/categories_repo.dart' as _i19;
 import '../../Domain/repository_contract/Product_repo.dart' as _i17;
 import '../../Domain/repository_contract/subcategory_repo.dart' as _i6;
+import '../../Domain/usecases/Auth_usecase/SignIn_usecase.dart' as _i29;
 import '../../Domain/usecases/Auth_usecase/Signup_usecase.dart' as _i26;
-import '../../Domain/usecases/brands_usecase.dart' as _i29;
+import '../../Domain/usecases/brands_usecase.dart' as _i31;
 import '../../Domain/usecases/categories_usecase.dart' as _i28;
 import '../../Domain/usecases/product_usecase.dart' as _i23;
 import '../../Domain/usecases/subcategory_usecase.dart' as _i8;
 import '../../presentation/home/tabs/category_tab/categoryViewModel/categoryViewModel.dart'
-    as _i31;
-import '../../presentation/home/tabs/hometab/view_model/HomeTab.dart' as _i30;
+    as _i33;
+import '../../presentation/home/tabs/hometab/view_model/HomeTab.dart' as _i32;
+import '../../presentation/signin_user/sign_in_view_model_cubit.dart' as _i30;
 import '../../presentation/signup_user/SignUp_ViewModel/sign_up_view_model_cubit.dart'
     as _i27;
 import '../api/api_manager.dart' as _i3;
@@ -89,14 +91,18 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i27.SignUpViewModel(gh<_i26.SignUpUsecase>()));
     gh.factory<_i28.CategoriesUseCase>(
         () => _i28.CategoriesUseCase(gh<_i19.CategoryRepo>()));
-    gh.factory<_i29.BrandUseCase>(
-        () => _i29.BrandUseCase(gh<_i24.Brandrepo>()));
-    gh.factory<_i30.HomeTabViewModel>(() => _i30.HomeTabViewModel(
+    gh.factory<_i29.SignInUsecase>(
+        () => _i29.SignInUsecase(authRepo: gh<_i21.AuthRepo>()));
+    gh.factory<_i30.SignInViewModel>(
+        () => _i30.SignInViewModel(gh<_i29.SignInUsecase>()));
+    gh.factory<_i31.BrandUseCase>(
+        () => _i31.BrandUseCase(gh<_i24.Brandrepo>()));
+    gh.factory<_i32.HomeTabViewModel>(() => _i32.HomeTabViewModel(
           gh<_i28.CategoriesUseCase>(),
-          gh<_i29.BrandUseCase>(),
+          gh<_i31.BrandUseCase>(),
           gh<_i23.MostSellingProductUseCase>(),
         ));
-    gh.factory<_i31.CategoryViewModel>(() => _i31.CategoryViewModel(
+    gh.factory<_i33.CategoryViewModel>(() => _i33.CategoryViewModel(
           gh<_i28.CategoriesUseCase>(),
           gh<_i8.SubcategoryUsecase>(),
         ));

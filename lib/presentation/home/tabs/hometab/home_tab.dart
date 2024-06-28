@@ -31,28 +31,7 @@ class HomeTabs extends StatelessWidget {
 
 
           SliverToBoxAdapter(child: SizedBox(height: 5.h,)),
-          SliverToBoxAdapter(
-            child: Row(children: [
-              Container(
-                width: 348.w,
-                height: 60.h,
-                child: TextField(
-                  onChanged: (value){
-                    //provide=value
-                  },
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.h),borderSide: BorderSide(width: 2)),
-                      prefixIcon: Icon(Icons.search),
-                      hintText: "what do you search for?",
-                      hintStyle: TextStyle( fontSize: 20.h)
-                  ),
-                ),
-              ),
-              SizedBox(width: 10.w,),
-              Icon(Icons.shopping_cart_outlined,size: 40.h,)
-            ],),
-          ),
-          SliverToBoxAdapter(
+           SliverToBoxAdapter(
             child: CarouselSlider.builder(
               options: CarouselOptions(
                 autoPlay: true,

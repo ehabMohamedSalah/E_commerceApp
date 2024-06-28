@@ -17,26 +17,7 @@ class CategoryTab extends StatelessWidget {
         child: Column(
            children: [
              SizedBox(height: 5.h,),
-             Row(children: [
-        Container(
-        width: 348.w,
-          height: 60.h,
-          child: TextField(
-            onChanged: (value){
-              //provide=value
-            },
-            decoration: InputDecoration(
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.h),borderSide: BorderSide(width: 2)),
-                prefixIcon: Icon(Icons.search),
-                hintText: "what do you search for?",
-                hintStyle: TextStyle( fontSize: 20.h)
-            ),
-          ),
-        ),
-        SizedBox(width: 10.w,),
-        Icon(Icons.shopping_cart_outlined,size: 40.h,)
-        ],),
-             CategoryList(),
+              CategoryList(),
 
         ]),
       ),

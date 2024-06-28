@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../core/constant.dart';
+import '../../core/local/prefs_helper.dart';
 import '../../core/resuable_component/custom_form_field.dart';
 import '../../core/resuable_component/text_buttom.dart';
 import '../../core/utils/routes_manager.dart';
@@ -109,6 +110,7 @@ class _SignUpState extends State<SignUp> {
                           );
                         }
                         if(state is SignUpSuccessState){
+                          PrefsHelper.setToken(state.token??"");
                           Fluttertoast.showToast(
                               msg: "Register is Success",
                               toastLength: Toast.LENGTH_SHORT,
