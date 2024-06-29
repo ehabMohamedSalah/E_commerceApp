@@ -7,4 +7,5 @@ class Endpoints{
   }
   static const String signupEndpoint="/api/v1/auth/signup";
   static const String singInEndpoint="/api/v1/auth/signin";
+  static const String AddtoCart="/api/v1/cart";
 }

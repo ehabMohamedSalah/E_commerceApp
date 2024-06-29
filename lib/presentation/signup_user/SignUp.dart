@@ -7,9 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../core/constant.dart';
-import '../../core/local/prefs_helper.dart';
-import '../../core/resuable_component/custom_form_field.dart';
+ import '../../core/resuable_component/custom_form_field.dart';
 import '../../core/resuable_component/text_buttom.dart';
+import '../../core/shared_prefs/local/prefs_helper.dart';
 import '../../core/utils/routes_manager.dart';
 import '../../core/utils/strings_manager.dart';
 

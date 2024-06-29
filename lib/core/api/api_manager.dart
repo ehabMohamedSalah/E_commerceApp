@@ -23,8 +23,10 @@ static init() {
  return response;
   }
 
- Future<Response> postRequest({required String endpoint,Map<String, dynamic>? body})async{
- var response= await dio.post( endpoint, data: body);
+ Future<Response> postRequest({required String endpoint,Map<String, dynamic>? body,Map<String, dynamic>? headers})async{
+ var response= await dio.post( endpoint, data: body,options: Options(
+   headers: headers
+ ));
  return response;
   }
 

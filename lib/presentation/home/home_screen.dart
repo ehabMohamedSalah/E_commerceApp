@@ -1,5 +1,4 @@
-import 'package:e_commerce/core/local/prefs_helper.dart';
-import 'package:e_commerce/core/utils/routes_manager.dart';
+ import 'package:e_commerce/core/utils/routes_manager.dart';
 import 'package:e_commerce/presentation/home/tabs/category_tab/category_tab.dart';
 import 'package:e_commerce/presentation/home/tabs/hometab/home_tab.dart';
 import 'package:e_commerce/presentation/home/tabs/profile_tab/profile_tab.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../core/shared_prefs/local/prefs_helper.dart';
 import '../../core/utils/colors_manager.dart';
 import 'homeViewModel.dart';
 

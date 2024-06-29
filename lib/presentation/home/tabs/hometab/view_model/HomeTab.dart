@@ -1,6 +1,7 @@
 
 
 import 'package:bloc/bloc.dart';
+import 'package:e_commerce/Domain/usecases/add_to_cart_usecase.dart';
 import 'package:e_commerce/Domain/usecases/brands_usecase.dart';
 import 'package:e_commerce/Domain/usecases/categories_usecase.dart';
 import 'package:e_commerce/Domain/usecases/product_usecase.dart';
@@ -14,11 +15,12 @@ class HomeTabViewModel extends Cubit<HomeTabState>{
 
   //ana 3ayzo yst5dm al useCase
   @factoryMethod
-  HomeTabViewModel(this.categoriesUseCase,this.brandUseCase,this.productUseCase):super(NewTabInitialState());
+  HomeTabViewModel(this.categoriesUseCase,this.brandUseCase,this.productUseCase,this.addToCartUsecase):super(NewTabInitialState());
 
   CategoriesUseCase categoriesUseCase;
   BrandUseCase brandUseCase;
   MostSellingProductUseCase productUseCase;
+  AddToCartUsecase addToCartUsecase;
 
   GetCateories()async{
     emit(HomeTabLoadingState());
