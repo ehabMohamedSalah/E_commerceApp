@@ -24,7 +24,7 @@ class _BrandsListState extends State<BrandsList> {
   }
   Widget build(BuildContext context) {
     return BlocBuilder<HomeTabViewModel,HomeTabState>(
-        buildWhen:  (previous, current) => current is BrandSuccessState ||current is BrandTabErrorState ||current is BrandTabErrorState,
+        buildWhen:  (previous, current) => current is BrandSuccessState ||current is BrandTabErrorState ||current is BrandTabLoadingState,
         builder:  (context, state) {
           if(state is BrandSuccessState ){
             return   SizedBox(

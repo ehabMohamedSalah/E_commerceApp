@@ -10,6 +10,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../../Domain/entity/BrandEntity.dart';
 import '../../../../../Domain/entity/Categories_entity.dart';
 import '../../../../../Domain/entity/ProductEntity/ProductEntity.dart';
+import '../../../../../Domain/entity/cart_entity_response/CartResponseEntity.dart';
  @injectable
 class HomeTabViewModel extends Cubit<HomeTabState>{
 
@@ -39,11 +40,23 @@ class HomeTabViewModel extends Cubit<HomeTabState>{
             (error) => emit(BrandTabErrorState(error)),
     );
   }
-  GetProduct()async{
-      emit(ProductLoadingState());
-      var response= await productUseCase.call();
-      response.fold((products) => emit(ProductSuccessState(products)),
-              (error) => emit(ProductErrorState(error)));
+  GetProduct()async {
+    emit(ProductLoadingState());
+    var response = await productUseCase.call();
+    response.fold((products) => emit(ProductSuccessState(products)),
+            (error) => emit(ProductErrorState(error)));
+  }
+  addToCart({required String productId})async{
+    var response=await addToCartUsecase.call(ProductId: productId);
+    emit(AddToCartLoading(productId));
+    response.fold(
+            (addtocart) {
+               emit(AddToCartSuccess(productId, addtocart));
+            },
+
+            (error) {
+               emit(AddToCartError(productId, error));
+            });
   }
 }
 
@@ -69,6 +82,7 @@ class BrandSuccessState extends HomeTabState{
    List<BrandEntity> brands;
    BrandSuccessState(this.brands);
 }
+
 class ProductLoadingState extends HomeTabState{}
 class ProductErrorState extends HomeTabState{
    String errorMessage;
@@ -77,4 +91,19 @@ class ProductErrorState extends HomeTabState{
 class ProductSuccessState extends HomeTabState{
    List<ProductEntity> products;
    ProductSuccessState(this.products);
+}
+
+class AddToCartLoading extends HomeTabState{
+   String ProductId;
+   AddToCartLoading(this.ProductId);
+}
+class AddToCartError extends HomeTabState{
+  String ProductId;
+  String ErrorMessage;
+  AddToCartError(this.ProductId,this.ErrorMessage);
+}
+class AddToCartSuccess extends HomeTabState{
+  String ProductId;
+  CartResponseEntity cartResponseEntity;
+  AddToCartSuccess(this.ProductId,this.cartResponseEntity);
 }
