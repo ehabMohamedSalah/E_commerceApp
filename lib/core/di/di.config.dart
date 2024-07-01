@@ -48,6 +48,8 @@ import '../../Domain/usecases/product_usecase.dart' as _i25;
 import '../../Domain/usecases/subcategory_usecase.dart' as _i8;
 import '../../presentation/home/tabs/category_tab/categoryViewModel/categoryViewModel.dart'
     as _i38;
+import '../../presentation/home/tabs/hometab/view_model/Brand_viewModel.dart'
+    as _i39;
 import '../../presentation/home/tabs/hometab/view_model/HomeTab.dart' as _i37;
 import '../../presentation/signin_user/sign_in_view_model_cubit.dart' as _i34;
 import '../../presentation/signup_user/SignUp_ViewModel/sign_up_view_model_cubit.dart'
@@ -118,6 +120,8 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i30.CategoriesUseCase>(),
           gh<_i8.SubcategoryUsecase>(),
         ));
+    gh.factory<_i39.BrandViewModel>(
+        () => _i39.BrandViewModel(gh<_i35.BrandUseCase>()));
     return this;
   }
 }

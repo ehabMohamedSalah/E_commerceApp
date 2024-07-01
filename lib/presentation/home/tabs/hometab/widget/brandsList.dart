@@ -1,8 +1,8 @@
-import 'package:e_commerce/presentation/home/tabs/hometab/view_model/HomeTab.dart';
-import 'package:flutter/material.dart';
+import 'package:e_commerce/core/DI/di.dart';
+ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import '../view_model/Brand_viewModel.dart';
 import 'BrandWidget.dart';
 
 class BrandsList extends StatefulWidget {
@@ -13,46 +13,40 @@ class BrandsList extends StatefulWidget {
 
 class _BrandsListState extends State<BrandsList> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    //3shan b3d m build awl frame ynade 3ala GetCateories
-    //b3d m tbuild awl frame le al widget nade 3ala al categories
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.read<HomeTabViewModel>().GetBrands();
-    });
-  }
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeTabViewModel,HomeTabState>(
-        buildWhen:  (previous, current) {
-          if(current is BrandSuccessState || current is BrandTabErrorState ||current is BrandTabLoadingState){
-            return true;
-          }
-          return false;
-        },
-        builder:  (context, state) {
+    return BlocProvider(
+      create: (context) => getIt<BrandViewModel>()..GetBrands(),
+      child: BlocBuilder<BrandViewModel,BrandState>(
+          buildWhen:  (previous, current) {
+            if(current is BrandSuccessStatee || current is BrandErrorState ||current is BrandLoadingState){
+              return true;
+            }
+            return false;
+          },
+          builder:  (context, state) {
 
-          if(state is BrandSuccessState ){
-            return   SizedBox(
-              height: 250.h,
-              child: GridView.builder(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) =>
-                    BrandWidget(state.brands[index]),
-                itemCount: state.brands.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16.h,
+            if(state is BrandSuccessStatee ){
+              return   SizedBox(
+                height: 250.h,
+                child: GridView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) =>
+                      BrandWidget(state.brands[index]),
+                  itemCount: state.brands.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16.h,
+                  ),
                 ),
-              ),
-            );
-          }
-          if(state is BrandTabErrorState){
-            return Center(child: Text(state.errorMessage),);
-          }
+              );
+            }
+            if(state is BrandErrorState){
+              return Center(child: Text(state.errorMessage),);
+            }
 
-          return Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator());
 
-        },);
+          },),
+    );
   }
 }
