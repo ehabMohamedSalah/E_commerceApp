@@ -24,8 +24,14 @@ class _BrandsListState extends State<BrandsList> {
   }
   Widget build(BuildContext context) {
     return BlocBuilder<HomeTabViewModel,HomeTabState>(
-        buildWhen:  (previous, current) => current is BrandSuccessState ||current is BrandTabErrorState ||current is BrandTabLoadingState,
+        buildWhen:  (previous, current) {
+          if(current is BrandSuccessState || current is BrandTabErrorState ||current is BrandTabLoadingState){
+            return true;
+          }
+          return false;
+        },
         builder:  (context, state) {
+
           if(state is BrandSuccessState ){
             return   SizedBox(
               height: 250.h,
@@ -39,7 +45,7 @@ class _BrandsListState extends State<BrandsList> {
                   crossAxisSpacing: 16.h,
                 ),
               ),
-            );;
+            );
           }
           if(state is BrandTabErrorState){
             return Center(child: Text(state.errorMessage),);

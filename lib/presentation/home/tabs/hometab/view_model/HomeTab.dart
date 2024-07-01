@@ -5,6 +5,7 @@ import 'package:e_commerce/Domain/usecases/add_to_cart_usecase.dart';
 import 'package:e_commerce/Domain/usecases/brands_usecase.dart';
 import 'package:e_commerce/Domain/usecases/categories_usecase.dart';
 import 'package:e_commerce/Domain/usecases/product_usecase.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../Domain/entity/BrandEntity.dart';
@@ -14,6 +15,9 @@ import '../../../../../Domain/entity/cart_entity_response/CartResponseEntity.dar
  @injectable
 class HomeTabViewModel extends Cubit<HomeTabState>{
 
+   static HomeTabViewModel get(context){
+     return BlocProvider.of(context);
+   }
   //ana 3ayzo yst5dm al useCase
   @factoryMethod
   HomeTabViewModel(this.categoriesUseCase,this.brandUseCase,this.productUseCase,this.addToCartUsecase):super(NewTabInitialState());
@@ -34,8 +38,8 @@ class HomeTabViewModel extends Cubit<HomeTabState>{
   }
   GetBrands()async{
     emit(BrandTabLoadingState());
-    var result=await brandUseCase.call();
-    result.fold(
+    var response=await brandUseCase.call();
+    response.fold(
             (brands) =>emit(BrandSuccessState(brands)),
             (error) => emit(BrandTabErrorState(error)),
     );
@@ -47,11 +51,12 @@ class HomeTabViewModel extends Cubit<HomeTabState>{
             (error) => emit(ProductErrorState(error)));
   }
   addToCart({required String productId})async{
-    var response=await addToCartUsecase.call(ProductId: productId);
     emit(AddToCartLoading(productId));
+
+    var response=await addToCartUsecase.call(ProductId: productId);
     response.fold(
-            (addtocart) {
-               emit(AddToCartSuccess(productId, addtocart));
+            (cartResponseEntity) {
+               emit(AddToCartSuccess(productId, cartResponseEntity));
             },
 
             (error) {

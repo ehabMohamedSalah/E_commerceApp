@@ -14,7 +14,7 @@ class BrandsDataSourceImpl extends BrandsDataSource{
     try{
       //al response shayl hagat ktera mnha al data> al heya al json ale 3ayz a7wlo mn al json  le model BrandsResponse
       var response=await Apimanager.getRequest(Endpoint:Endpoints.BrandsEndpoint  );
-      BrandsResponse brandsResponse= BrandsResponse.fromJson(response.data);
+      var brandsResponse= BrandsResponse.fromJson(response.data);
       return left(brandsResponse);
     }catch(error){
       return right(error.toString());
