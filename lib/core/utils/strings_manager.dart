@@ -22,6 +22,12 @@ static const String validFullname='Value Cant Be empty';
 static const String hintMobile="enter your mobile no";
 static const String mobileNo="Mobile Number";
 static const String notValidPhone="Number must be 11 characters";
+static const String cart="Cart";
+  static const String totalPrice="Total Price";
+  static const String checkOut="Check Out";
+
+
+
 
 
 }

@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/shared_prefs/local/prefs_helper.dart';
+import '../model/GetCartResponse/GetCartResponse.dart';
 
 @Injectable(as:CartDatasource)
 class CartDatasourceImpl extends CartDatasource{
@@ -23,6 +24,19 @@ class CartDatasourceImpl extends CartDatasource{
        "token":PrefsHelper.getToken(),
      });
      return left(CartResponseModel.fromJson(response.data));
+    }catch(error){
+      return right(error.toString());
+    }
+  }
+
+  @override
+  Future<Either<GetCartResponse, String>> GetCart() async{
+    try{
+      var response=  await apiManager.getRequest(Endpoint: Endpoints.AddtoCart,headers: {
+        "token":PrefsHelper.getToken(),
+      });
+      return left(GetCartResponse.fromJson(response.data));
+
     }catch(error){
       return right(error.toString());
     }

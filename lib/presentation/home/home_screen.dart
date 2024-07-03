@@ -30,7 +30,9 @@ class HomeScreen extends StatelessWidget {
               Navigator.pushNamedAndRemoveUntil(context, RoutesManager.SignInroute, (route) => false);
             },icon:Icon(Icons.logout,size: 40.h),),
 
-            IconButton(onPressed: (){},icon:Icon(Icons.shopping_cart_outlined,size: 40.h),)
+            IconButton(onPressed: (){
+              Navigator.pushNamed(context, RoutesManager.cartScreen);
+            },icon:Icon(Icons.shopping_cart_outlined,size: 40.h),)
 
           ],
           centerTitle: true,

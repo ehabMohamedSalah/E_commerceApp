@@ -18,8 +18,10 @@ static init() {
       }
     ),);
 }
- Future< Response > getRequest({ required String Endpoint,  Map<String, dynamic>? queryParameters})async{
- var response=await dio.get( Endpoint,queryParameters: queryParameters);
+ Future< Response > getRequest({ required String Endpoint,  Map<String, dynamic>? queryParameters, Map<String, dynamic>? headers})async{
+ var response=await dio.get( Endpoint,queryParameters: queryParameters,options: Options(
+   headers: headers,
+ ));
  return response;
   }
 

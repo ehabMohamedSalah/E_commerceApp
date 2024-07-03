@@ -5,6 +5,11 @@ class assetManagerr{
   static const String route="assets/images/route.png";
   static const String logo="assets/images/Logo.png";
   static const String routelogo="assets/images/routelogo.jpg";
+  static const String add="assets/images/add.svg";
+  static const String delete="assets/images/delete.svg";
+  static const String subtract="assets/images/subtract.svg";
+
+
 
 
 

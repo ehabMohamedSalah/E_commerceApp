@@ -1,4 +1,5 @@
 import 'package:e_commerce/congfig/theme/appTheme.dart';
+import 'package:e_commerce/presentation/home/cart/cart_screen.dart';
  import 'package:e_commerce/presentation/home/home_screen.dart';
 import 'package:e_commerce/presentation/signin_user/signin.dart';
 import 'package:e_commerce/presentation/signup_user/SignUp.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         return     MaterialApp(
           debugShowCheckedModeBanner: false,
           routes:{
+            RoutesManager.cartScreen:(context) => CartScreen(),
             RoutesManager.HomeRoutes:(context) => HomeScreen(),
             RoutesManager.SignInroute:(context) => SignIn(),
             RoutesManager.SignUproute:(context) => SignUp(),

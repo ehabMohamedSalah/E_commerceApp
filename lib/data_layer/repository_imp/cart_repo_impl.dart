@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commerce/Domain/entity/cart_entity_response/CartResponseEntity.dart';
 import 'package:e_commerce/Domain/repository_contract/cart-repo.dart';
 import 'package:e_commerce/data_layer/datasource_contract/cart_datasource.dart';
+import 'package:e_commerce/data_layer/model/GetCartResponse/GetCartResponse.dart';
 import 'package:injectable/injectable.dart';
 @Injectable(as: CartRepo)
 class CartRepoImpl extends CartRepo{
@@ -17,6 +18,16 @@ class CartRepoImpl extends CartRepo{
            },
            (error) => right(error),
    );
+  }
+
+  @override
+  Future<Either<GetCartResponse, String>> GetCart() async{
+    var result=await apiDataSource.GetCart();
+    return result.fold(
+            (response)  {
+              return left(response);
+            },
+            (error) => right(error));
   }
 
 }

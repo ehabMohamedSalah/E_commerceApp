@@ -39,7 +39,13 @@ class AppTheme{
               fontWeight: FontWeight.w600,
               fontSize: 20.sp,
               color: ColorManager.primaryColor
-          )
+          ),
+        labelLarge: TextStyle(
+          fontWeight:FontWeight.w500,
+          fontSize: 18.sp,
+          color: Color(0xff06004F),
+
+        )
       )
   );
 }

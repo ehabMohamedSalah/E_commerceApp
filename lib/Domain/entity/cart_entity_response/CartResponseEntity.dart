@@ -6,33 +6,17 @@ import 'CartEntity.dart';
 
 class CartResponseEntity {
   CartResponseEntity({
+    this.status,
+    this.statusMsg,
       this.message, 
       this.numOfCartItems, 
       this.data,});
 
-  CartResponseEntity.fromJson(dynamic json) {
-    message = json['message'];
-    numOfCartItems = json['numOfCartItems'];
-    data = json['data'] != null ? CartEntity.fromJson(json['data']) : null;
-  }
-  String? message;
+    String? status;
+    String? statusMsg;
+   String? message;
   int? numOfCartItems;
   CartEntity? data;
-CartResponseEntity copyWith({  String? message,
-  int? numOfCartItems,
-  CartEntity? data,
-}) => CartResponseEntity(  message: message ?? this.message,
-  numOfCartItems: numOfCartItems ?? this.numOfCartItems,
-  data: data ?? this.data,
-);
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['message'] = message;
-    map['numOfCartItems'] = numOfCartItems;
-    if (data != null) {
-      map['data'] = data?.toJson();
-    }
-    return map;
-  }
+
 
 }
