@@ -8,4 +8,10 @@ class Endpoints{
   static const String signupEndpoint="/api/v1/auth/signup";
   static const String singInEndpoint="/api/v1/auth/signin";
   static const String AddtoCart="/api/v1/cart";
+  static  String UpdateProduct(String ProductId){
+    return "/api/v1/cart${ProductId}";
+  }
+  static  String UserData(String UserId){
+    return "/api/v1/users/${UserId}";
+  }
 }

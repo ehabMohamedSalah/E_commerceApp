@@ -45,7 +45,12 @@ class AppTheme{
           fontSize: 18.sp,
           color: Color(0xff06004F),
 
-        )
+        ),
+        bodyMedium:   TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.w500,
+          fontSize: 18.sp
+      ),
       )
   );
 }

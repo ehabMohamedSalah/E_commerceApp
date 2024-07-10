@@ -3,6 +3,7 @@ import 'package:e_commerce/core/api/api_manager.dart';
 import 'package:e_commerce/core/api/endpoint.dart';
 import 'package:e_commerce/data_layer/datasource_contract/cart_datasource.dart';
 import 'package:e_commerce/data_layer/model/cart_response/CartResponseModel.dart';
+import 'package:e_commerce/data_layer/model/update_product/UpdateProductResponse.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -37,6 +38,18 @@ class CartDatasourceImpl extends CartDatasource{
       });
       return left(GetCartResponse.fromJson(response.data));
 
+    }catch(error){
+      return right(error.toString());
+    }
+  }
+
+  @override
+  Future<Either<UpdateProductResponse, String>> UpdateProduct({required String ProductId}) async{
+    try{
+      var response=await apiManager.put(headers: {
+        "token":PrefsHelper.getToken(),
+      }, Endpoint: Endpoints.UpdateProduct(ProductId));
+      return left(UpdateProductResponse.fromJson(response.data));
     }catch(error){
       return right(error.toString());
     }

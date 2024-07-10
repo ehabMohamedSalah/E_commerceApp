@@ -25,6 +25,14 @@ static const String notValidPhone="Number must be 11 characters";
 static const String cart="Cart";
   static const String totalPrice="Total Price";
   static const String checkOut="Check Out";
+  static const String yourFullName="Your Full Name";
+  static const String yourEmail="Your E-mail";
+  static const String yourPass="Your password";
+  static const String yourMobile="Your mobile number";
+  static const String yourAddress="Your Address";
+
+
+
 
 
 
