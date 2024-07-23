@@ -70,11 +70,9 @@ class _WishlistWidgetState extends State<WishlistWidget> {
                               child: Text(widget.products.title??"",style: Theme.of(context).textTheme.bodyMedium,)),
                          InkWell(
                            onTap: () {
-                             isClick=!isClick;
-                             wishlistViewModel.isClicked(isClick);
-                             print(isClick);
+
                            },
-                              child: isClick==false?SvgPicture.asset(assetManagerr.love,):SvgPicture.asset(assetManagerr.like,)
+                              child: SvgPicture.asset(assetManagerr.delete,width: 30,height: 25,colorFilter: ColorFilter.mode( Theme.of(context).primaryColor,  BlendMode.srcIn),)
                          )
                 ])
 ,                      Row(
