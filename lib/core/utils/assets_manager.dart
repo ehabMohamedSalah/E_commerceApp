@@ -10,7 +10,7 @@ class assetManagerr{
   static const String subtract="assets/images/subtract.svg";
   static const String dumyShoas="assets/images/dumyy.png";
   static const String love="assets/images/love.svg";
-
+  static const String like="aassets/images/like.svg";
 
 
 

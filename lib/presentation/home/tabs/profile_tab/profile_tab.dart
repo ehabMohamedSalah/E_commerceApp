@@ -74,7 +74,7 @@ class _ProfileTabState extends State<ProfileTab> {
               if(state is ProfileViewModelError){
                 return Center(child: Text("${state.message}"),);
               }
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             },
 
           ),
