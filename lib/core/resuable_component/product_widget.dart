@@ -39,10 +39,60 @@ class ProductWidget extends StatelessWidget {
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
-              SvgPicture.asset(
-                "assets/images/like.svg",
-                height: 30.h,
-                width: 30.w,
+              BlocConsumer<HomeTabViewModel, HomeTabState>(
+                listenWhen: (previous, current) {
+                  if(current is AddToWishListLoading || current is AddToWishListError|| current is AddToWishListSuccess){
+                    return true;
+                  }return false;
+                },
+                buildWhen: (previous, current) {
+                  if(current is AddToWishListLoading || current is AddToWishListError|| current is AddToWishListSuccess){
+                    return true;
+                  }return false;
+                },
+                listener: (BuildContext context, HomeTabState state) {
+                  if (state is AddToWishListSuccess && state.ProductId==product.id) {
+                    Fluttertoast.showToast(
+                        msg: state.wishlistEntity.message ?? "",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  }
+                  if (state is AddToWishListError && state.ProductId==product.id) {
+                    Fluttertoast.showToast(
+                        msg: state.ErrorMessage,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  }
+                },
+                builder: (BuildContext context, HomeTabState state) {
+                  if(state is AddToWishListLoading && state.ProductId==product.id){
+                    return SizedBox(
+                        height: 30.h,
+                        width: 30.w,
+                        child: Center(child: CircularProgressIndicator(color: Colors.black87,),));
+                  }
+                  return InkWell(
+                    onTap: () {
+                      HomeTabViewModel.get(context).addToWishList(productId: product.id ?? "");
+
+                    },
+                    child: SvgPicture.asset(
+                      "assets/images/like.svg",
+                      height: 60.h,
+                      width: 30.w,
+
+                    ),
+                  );
+                },
+
               ),
             ],
           ),

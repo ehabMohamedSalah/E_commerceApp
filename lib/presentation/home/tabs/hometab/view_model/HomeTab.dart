@@ -1,7 +1,7 @@
 
 
 import 'package:bloc/bloc.dart';
-import 'package:e_commerce/Domain/usecases/add_to_cart_usecase.dart';
+ import 'package:e_commerce/Domain/usecases/add_to_cart_usecase.dart';
 import 'package:e_commerce/Domain/usecases/brands_usecase.dart';
 import 'package:e_commerce/Domain/usecases/categories_usecase.dart';
 import 'package:e_commerce/Domain/usecases/product_usecase.dart';
@@ -12,6 +12,8 @@ import '../../../../../Domain/entity/BrandEntity.dart';
 import '../../../../../Domain/entity/Categories_entity.dart';
 import '../../../../../Domain/entity/ProductEntity/ProductEntity.dart';
 import '../../../../../Domain/entity/cart_entity_response/CartResponseEntity.dart';
+ import '../../../../../Domain/entity/wishlist/add_wish_entity/add_Wishlist_entity.dart';
+import '../../../../../Domain/usecases/add_wishlist_usecase.dart';
  @injectable
 class HomeTabViewModel extends Cubit<HomeTabState>{
 
@@ -20,12 +22,13 @@ class HomeTabViewModel extends Cubit<HomeTabState>{
    }
   //ana 3ayzo yst5dm al useCase
   @factoryMethod
-  HomeTabViewModel(this.categoriesUseCase,this.brandUseCase,this.productUseCase,this.addToCartUsecase):super(NewTabInitialState());
+  HomeTabViewModel(this.categoriesUseCase,this.brandUseCase,this.productUseCase,this.addToCartUsecase,this.addWishListUsecase):super(NewTabInitialState());
 
   CategoriesUseCase categoriesUseCase;
   BrandUseCase brandUseCase;
   MostSellingProductUseCase productUseCase;
   AddToCartUsecase addToCartUsecase;
+   AddWishListUsecase addWishListUsecase;
 
   GetCateories()async{
     emit(HomeTabLoadingState());
@@ -63,6 +66,19 @@ class HomeTabViewModel extends Cubit<HomeTabState>{
                emit(AddToCartError(productId, error));
             });
   }
+   addToWishList({required String productId})async{
+     emit(AddToWishListLoading(productId));
+
+     var response=await addWishListUsecase.call(productId);
+     response.fold(
+             (wishListEntity) {
+           emit(AddToWishListSuccess(productId, wishListEntity));
+         },
+
+             (error) {
+           emit(AddToWishListError(productId, error));
+         });
+   }
 }
 
 
@@ -111,4 +127,19 @@ class AddToCartSuccess extends HomeTabState{
   String ProductId;
   CartResponseEntity cartResponseEntity;
   AddToCartSuccess(this.ProductId,this.cartResponseEntity);
+}
+
+class AddToWishListLoading extends HomeTabState{
+  String ProductId;
+  AddToWishListLoading(this.ProductId);
+}
+class AddToWishListError extends HomeTabState{
+  String ProductId;
+  String ErrorMessage;
+  AddToWishListError(this.ProductId,this.ErrorMessage);
+}
+class AddToWishListSuccess extends HomeTabState{
+  String ProductId;
+  WishlistEntity wishlistEntity;
+  AddToWishListSuccess(this.ProductId,this.wishlistEntity);
 }

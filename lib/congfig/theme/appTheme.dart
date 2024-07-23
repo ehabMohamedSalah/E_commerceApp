@@ -49,7 +49,9 @@ class AppTheme{
         bodyMedium:   TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.w500,
-          fontSize: 18.sp
+          fontSize: 18.sp,
+          overflow: TextOverflow.ellipsis,
+
       ),
       )
   );
