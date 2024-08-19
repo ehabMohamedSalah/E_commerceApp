@@ -14,8 +14,8 @@ class WishListDeleteDataSourceImpl extends WishListDeleteDataSource{
   @override
   Future<Either<DeleteWishlistResponse, String>> WishListDelete({required String ProductId}) async {
    try{
-     var result= await apiManager.getRequest(Endpoint: Endpoints.deleteItemOfWishlisr(ProductId),headers: {
-       "token":PrefsHelper.getToken(),});
+     var result= await apiManager.delete(Endpoint: Endpoints.deleteItemOfWishlisr(ProductId),
+         headers: {"token":PrefsHelper.getToken(),});
       return left(DeleteWishlistResponse.fromJson(result.data));
    }catch(error){
      return right(error.toString());

@@ -27,7 +27,8 @@ class WatchList extends StatelessWidget {
                   Center(child: Text(state.errorMessage));
                 }
                 if(state is WishlistViewModelSuccess){
-                  return Expanded(
+
+                   return Expanded(
                     child: ListView.separated(
                         itemBuilder:  (context, index) => WishlistWidget(
                           state.products[index],

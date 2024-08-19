@@ -3,4 +3,6 @@ class RoutesManager{
   static const String SignInroute="/SignIn";
   static const String SignUproute="/SignUp";
   static const String cartScreen="/cartScreen";
+  static const String cartView="/cartView";
+
 }

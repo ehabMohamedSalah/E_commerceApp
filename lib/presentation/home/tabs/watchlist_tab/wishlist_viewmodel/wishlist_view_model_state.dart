@@ -16,4 +16,19 @@ class WishlistViewModelSuccess extends WishlistViewModelState {
   WishlistViewModelSuccess(this.products);
 }
 
+class DeleteWishlistViewModelLoading extends WishlistViewModelState {
+  String productId;
+DeleteWishlistViewModelLoading(this.productId);
+}
+class DeleteWishlistViewModelError extends WishlistViewModelState {
+  String errorMessage;
+  String productId;
+  DeleteWishlistViewModelError(this.errorMessage,this.productId);
+}
+class DeleteWishlistViewModelSuccess extends WishlistViewModelState {
+  DeleteWishlistEntity deleteProduct;
+  String productId;
+  DeleteWishlistViewModelSuccess(this.deleteProduct,this.productId);
+}
+
 

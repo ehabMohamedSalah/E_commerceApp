@@ -6,8 +6,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
+import '../../../core/utils/routes_manager.dart';
 import '../../../core/utils/strings_manager.dart';
+import '../../../payment_getway/feature/checkout/presentation/provider.dart';
+import '../../../payment_getway/feature/checkout/presentation/views/my_cart_view.dart';
 import 'Cart_ViewModel/cart_view_model_cubit.dart';
 
 class CartScreen extends StatelessWidget {
@@ -15,12 +19,17 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingProvider provider= Provider.of<SettingProvider>(context);
+
     return BlocProvider(
       create: (context) => getIt<CartViewModel>()..GetCard(),
       child: Scaffold(
           appBar: AppBar(
             title: Text(StringsManger.cart),
             centerTitle: true,
+            leading: IconButton(onPressed: (){
+              Navigator.pushNamed(context, RoutesManager.HomeRoutes);
+            } , icon: Icon(Icons.arrow_back)),
           ),
         body: Padding(
           padding:   REdgeInsets.all(12.0),
@@ -47,7 +56,10 @@ class CartScreen extends StatelessWidget {
                         ),
                         ElevatedButton(
                             style:ElevatedButton.styleFrom(backgroundColor: Theme.of(context).primaryColor) ,
-                            onPressed: (){}, child: Row(children: [
+                            onPressed: (){
+                              provider.changePrice(state.cart.data?.totalCartPrice??0);
+                              Navigator.pushNamed(context, RoutesManager.cartView,arguments: state.cart.data);
+                            }, child: Row(children: [
                           Text(StringsManger.checkOut,style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),),
                           Icon(Icons.arrow_forward,color: Colors.white,),
                         ],))

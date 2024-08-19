@@ -45,3 +45,18 @@ class UpdateProductSuccess extends CartViewModelState{
  UpdateProductResponse updateProductResponse;
  UpdateProductSuccess(this.ProductId,this.updateProductResponse);
 }
+
+class DeleteCartLoading extends CartViewModelState{
+ String ProductId;
+ DeleteCartLoading(this.ProductId);
+}
+class DeleteCartError extends CartViewModelState{
+ String ProductId;
+ String ErrorMessage;
+ DeleteCartError(this.ProductId,this.ErrorMessage);
+}
+class DeleteCartSuccess extends CartViewModelState{
+ String ProductId;
+ DeleteCartResponse deleteCartResponse;
+ DeleteCartSuccess(this.ProductId,this.deleteCartResponse);
+}

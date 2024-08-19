@@ -7,18 +7,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../../../core/utils/assets_manager.dart';
  import '../Cart_ViewModel/cart_view_model_cubit.dart';
 
-class CartItemWidget extends StatefulWidget {
+class CartItemWidget extends StatelessWidget {
   CartItemModel cartModel;
   CartItemWidget(this.cartModel);
 
-  @override
-  State<CartItemWidget> createState() => _CartItemWidgetState();
-}
-
-class _CartItemWidgetState extends State<CartItemWidget> {
   @override
   Widget build(BuildContext context) {
     int counter=1;
@@ -43,7 +39,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
               child: CachedNetworkImage(
                 width: 120.w,
                 height: 113.h,
-                imageUrl: widget.cartModel.product?.imageCover??"",
+                imageUrl: cartModel.product?.imageCover??"",
                 imageBuilder: (context, imageProvider) => Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -66,17 +62,72 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                   children: [
                     Expanded(
                         flex: 2,
-                        child: Text(widget.cartModel.product?.title??"",style: Theme.of(context).textTheme.labelLarge?.copyWith(overflow: TextOverflow.ellipsis, ),)),
-                    Expanded(
-                        flex: 1,
-                        child: SvgPicture.asset(assetManagerr.delete,width: 25.w,colorFilter: ColorFilter.mode(Colors.black,  BlendMode.srcIn),)),
+                        child: Text(cartModel.product?.title??"",style: Theme.of(context).textTheme.labelLarge?.copyWith(overflow: TextOverflow.ellipsis, ),)),
+                    BlocConsumer<CartViewModel,CartViewModelState>(
+                      listenWhen: (previous, current) {
+                        if (current is DeleteCartSuccess ||
+                            current is DeleteCartError ||
+                            current is DeleteCartLoading
+                       //  ||current is CartSuccessStatee
+                        ) {
+                          return true;
+                        }
+                        return false;
+                      },
+                        buildWhen: (previous, current) {
+                          if (current is DeleteCartSuccess ||
+                              current is DeleteCartError ||
+                              current is DeleteCartLoading) {
+                            return true;
+                          }
+                          return false;
+                        },
+                      listener: (context, state) {
+                        if (state is DeleteCartSuccess && state.ProductId==cartModel.product?.id) {
+                          Fluttertoast.showToast(
+                              msg: "delete is Success",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.green,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+
+                          CartViewModel.get(context)..GetCard();
+                        }
+                        if (state is DeleteCartError && state.ProductId==cartModel.product?.id) {
+                          Fluttertoast.showToast(
+                              msg: state.ErrorMessage,
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        }
+
+                      },
+                        builder: (context, state) {
+                        if(state  is DeleteCartLoading ){
+                          return Center(child: CircularProgressIndicator());
+                        }
+                          return InkWell(
+                            onTap: (){
+                              CartViewModel.get(context)..DelCartItem(ProductId: cartModel.product?.id??"");
+
+                            },
+                            child: SvgPicture.asset(assetManagerr.delete,width: 25.w,colorFilter: ColorFilter.mode(Colors.black,  BlendMode.srcIn),
+                            ),
+                          );
+                        },
+                    )
                   ],
                 ),
                 SizedBox(height: 13.h,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                  Text( "EGP ${widget.cartModel.price}",style: Theme.of(context).textTheme. labelLarge,),
+                  Text( "EGP ${cartModel.price}",style: Theme.of(context).textTheme. labelLarge,),
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -103,7 +154,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                                 SvgPicture.asset(assetManagerr.subtract,width: 20.w,colorFilter: ColorFilter.mode(Colors.white,  BlendMode.srcIn),),
                                 SizedBox(width: 10,),
                                 Text(
-                                  "${widget.cartModel.count}",style: TextStyle(color: Colors.white),),
+                                  "${cartModel.count}",style: TextStyle(color: Colors.white),),
                                 SizedBox(width: 10,),
                                 InkWell(
                                     onTap: (){

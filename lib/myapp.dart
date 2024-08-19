@@ -1,4 +1,5 @@
 import 'package:e_commerce/congfig/theme/appTheme.dart';
+import 'package:e_commerce/payment_getway/feature/checkout/presentation/views/my_cart_view.dart';
 import 'package:e_commerce/presentation/home/cart/cart_screen.dart';
  import 'package:e_commerce/presentation/home/home_screen.dart';
 import 'package:e_commerce/presentation/signin_user/signin.dart';
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
             RoutesManager.HomeRoutes:(context) => HomeScreen(),
             RoutesManager.SignInroute:(context) => SignIn(),
             RoutesManager.SignUproute:(context) => SignUp(),
+            RoutesManager.cartView:(context) => MyCartView(),
+
           },
           initialRoute: PrefsHelper.getToken().isNotEmpty?RoutesManager.HomeRoutes:RoutesManager.SignInroute,
           theme:AppTheme.lightTheme ,

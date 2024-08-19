@@ -39,5 +39,11 @@ Future< Response > put({ required String Endpoint,  Map<String, dynamic>? queryP
   return response;
 }
 
+Future< Response > delete({ required String Endpoint,  Map<String, dynamic>? queryParameters, Map<String, dynamic>? headers})async{
+  var response=await dio.delete( Endpoint,queryParameters: queryParameters,options: Options(
+    headers: headers,
+  ));
+  return response;
+}
 
 }

@@ -7,6 +7,7 @@ import '../repository_contract/wishlist_repo/delete_wishlist_repo.dart';
 @injectable
 class DeleteWishListUsecase{
   DeleteWishListRepo repo;
+  @factoryMethod
   DeleteWishListUsecase(this.repo);
 
   Future<Either<DeleteWishlistEntity, String>> call({required String ProductId}) {
