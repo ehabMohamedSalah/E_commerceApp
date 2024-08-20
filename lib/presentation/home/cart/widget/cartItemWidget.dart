@@ -113,8 +113,7 @@ class CartItemWidget extends StatelessWidget {
                         }
                           return InkWell(
                             onTap: (){
-                              CartViewModel.get(context)..DelCartItem(ProductId: cartModel.product?.id??"");
-
+                                CartViewModel.get(context)..DelCartItem(ProductId: cartModel.product?.id??"");
                             },
                             child: SvgPicture.asset(assetManagerr.delete,width: 25.w,colorFilter: ColorFilter.mode(Colors.black,  BlendMode.srcIn),
                             ),

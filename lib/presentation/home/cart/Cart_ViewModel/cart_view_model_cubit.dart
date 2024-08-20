@@ -40,7 +40,6 @@ class CartViewModel extends Cubit<CartViewModelState> {
   }
   addToCart({required String productId})async{
     emit(AddToCartLoading2(productId));
-
     var response=await addToCartUsecase.call(ProductId: productId);
     response.fold(
             (cartResponseEntity) {
