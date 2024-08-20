@@ -1,8 +1,10 @@
 import 'package:e_commerce/payment_getway/feature/checkout/presentation/views/widgets/payment_item_info.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../core/utils/styles.dart';
+import '../../provider.dart';
 import 'card_info_widget.dart';
 import 'cart_total_price.dart';
 
@@ -13,6 +15,8 @@ class ThankYouCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingProvider provider=Provider.of<SettingProvider>(context);
+
     return Container(
       width: double.infinity,
       decoration: ShapeDecoration(
@@ -41,7 +45,7 @@ class ThankYouCard extends StatelessWidget {
             SizedBox(height: 20,),
             PaymentItemInfo(title:"To" ,value:"Ehab salah" ,),
             Divider(thickness: 2,height: 60,),
-            TotalPrice(title: "Total", value: r"$50.97"),
+            TotalPrice(title: "Total", value: r"$""${provider.totalPrice}"),
             SizedBox(height: 30,),
             CardInfoWidget(),
             Spacer(),

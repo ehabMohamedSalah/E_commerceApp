@@ -2,7 +2,9 @@ import 'package:e_commerce/payment_getway/feature/checkout/presentation/views/wi
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
+import '../../provider.dart';
 import 'CustomCheckItem.dart';
 import 'CustomDashLine.dart';
 
@@ -11,6 +13,8 @@ class ThankYouViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingProvider provider=Provider.of<SettingProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.all(32.0),
       child: Stack(
